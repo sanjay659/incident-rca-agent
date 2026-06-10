@@ -11,7 +11,6 @@ It does TWO things:
 1. Builds smart search queries from Agent 1's analysis
 2. Searches Foundry IQ (Azure AI Search) for matching knowledge
 
-This is the KEY agent for the hackathon — it demonstrates
 Foundry IQ integration with multi-step reasoning.
 """
 import json

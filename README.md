@@ -10,6 +10,14 @@ Built for the [Agents League Hackathon @ AISF 2026](https://github.com/microsoft
 ![Streamlit](https://img.shields.io/badge/Streamlit-UI-red)
 
 ---
+---
+
+> **Why I built this:** As a Cloud & Solution Architect with 15+ years in enterprise systems, 
+> I've spent countless hours on incident war rooms watching teams manually dig through logs 
+> and runbooks. This project automates that reasoning process using a multi-agent pipeline — 
+> each agent handles one step of what a senior SRE does mentally during incident diagnosis.
+
+---
 
 ## 🎯 Problem
 
