@@ -1,0 +1,37 @@
+{
+  "incident_id": "INC-2026-002",
+  "title": "Order Database - High latency and connection timeouts",
+  "severity": "P2",
+  "timestamp": "2026-06-09T14:30:00Z",
+  "source": "Datadog",
+  "alert_details": {
+    "service": "order-service",
+    "environment": "production",
+    "region": "West Europe",
+    "error_rate": "12%",
+    "affected_endpoints": ["/api/v1/orders", "/api/v1/orders/{id}/track"],
+    "http_status_codes": [500, 504],
+    "duration_minutes": 45
+  },
+  "logs": [
+    {"timestamp": "2026-06-09T14:20:00Z", "level": "WARN", "message": "Database connection pool: 48/50 active connections"},
+    {"timestamp": "2026-06-09T14:22:00Z", "level": "WARN", "message": "Slow query detected: SELECT * FROM orders WHERE status='pending' - 12.5s execution time"},
+    {"timestamp": "2026-06-09T14:25:00Z", "level": "ERROR", "message": "SqlException: Connection timeout expired. The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement"},
+    {"timestamp": "2026-06-09T14:28:00Z", "level": "ERROR", "message": "Dead lock detected on table: orders - Transaction ID: TX-98234"},
+    {"timestamp": "2026-06-09T14:30:00Z", "level": "CRITICAL", "message": "Order service P95 latency exceeded 10s threshold - P2 alert triggered"}
+  ],
+  "infrastructure": {
+    "kubernetes_cluster": "prod-weu-aks-01",
+    "namespace": "orders",
+    "pod_status": "5/5 pods healthy",
+    "cpu_usage": "45%",
+    "memory_usage": "61%",
+    "database": {
+      "type": "Azure SQL",
+      "tier": "S3 Standard",
+      "dtu_usage": "95%",
+      "storage_usage": "78%"
+    },
+    "recent_deployments": []
+  }
+}

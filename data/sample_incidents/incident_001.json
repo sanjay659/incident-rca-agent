@@ -1,0 +1,33 @@
+{
+  "incident_id": "INC-2026-001",
+  "title": "Payment Service - 503 errors in production",
+  "severity": "P1",
+  "timestamp": "2026-06-09T08:15:00Z",
+  "source": "PagerDuty",
+  "alert_details": {
+    "service": "payment-service",
+    "environment": "production",
+    "region": "East US",
+    "error_rate": "45%",
+    "affected_endpoints": ["/api/v2/payments/process", "/api/v2/payments/status"],
+    "http_status_codes": [503, 504],
+    "duration_minutes": 25
+  },
+  "logs": [
+    {"timestamp": "2026-06-09T08:12:00Z", "level": "WARN", "message": "Connection pool exhausted for downstream service: fraud-detection-service"},
+    {"timestamp": "2026-06-09T08:13:00Z", "level": "ERROR", "message": "Circuit breaker OPEN for fraud-detection-service after 10 consecutive failures"},
+    {"timestamp": "2026-06-09T08:13:30Z", "level": "ERROR", "message": "TimeoutException: fraud-detection-service did not respond within 5000ms"},
+    {"timestamp": "2026-06-09T08:14:00Z", "level": "ERROR", "message": "HTTP 503 returned to client: upstream service unavailable"},
+    {"timestamp": "2026-06-09T08:15:00Z", "level": "CRITICAL", "message": "Payment processing failure rate exceeded 40% threshold - P1 alert triggered"}
+  ],
+  "infrastructure": {
+    "kubernetes_cluster": "prod-eus-aks-01",
+    "namespace": "payments",
+    "pod_status": "3/5 pods healthy",
+    "cpu_usage": "78%",
+    "memory_usage": "82%",
+    "recent_deployments": [
+      {"service": "fraud-detection-service", "version": "v2.4.1", "deployed_at": "2026-06-09T07:45:00Z", "deployed_by": "ci-pipeline"}
+    ]
+  }
+}
