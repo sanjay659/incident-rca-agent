@@ -43,8 +43,6 @@ A **4-agent reasoning pipeline** built on **Microsoft Foundry + Foundry IQ** tha
 ## 🏗️ Architecture
 
 ```
-<img width="1548" height="1016" alt="Designer (5)" src="https://github.com/user-attachments/assets/5930582d-780b-435c-ae93-b65b60e28dd8" />
-
 ┌──────────────────────────────────────────────────────────────────┐
 │                        Streamlit UI                              │
 │              (Select incident → View reasoning chain)            │
